@@ -1,0 +1,51 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# PROPHETIA Seeker Agent - Python Dependencies
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Data Collection
+yfinance==0.2.36                # Yahoo Finance API
+requests==2.31.0                # HTTP requests
+beautifulsoup4==4.12.3          # Web scraping (if needed)
+
+# Data Processing
+pandas==2.2.0                   # Data manipulation
+numpy==1.26.4                   # Numerical computing
+scikit-learn==1.4.0             # ML preprocessing
+
+# Blockchain
+web3==6.15.1                    # Ethereum-compatible (future)
+pycryptodome==3.20.0            # Cryptography
+hashlib                         # Built-in (file hashing)
+
+# Scheduling
+APScheduler==3.10.4             # Advanced scheduling
+python-crontab==3.0.0           # Cron-style scheduling
+
+# Configuration
+PyYAML==6.0.1                   # YAML config parsing
+python-dotenv==1.0.1            # Environment variables
+
+# Logging & Monitoring
+loguru==0.7.2                   # Enhanced logging
+colorlog==6.8.2                 # Colored console logs
+
+# Notifications
+slack-sdk==3.26.2               # Slack integration
+smtplib                         # Built-in (email)
+
+# Utilities
+python-dateutil==2.8.2          # Date parsing
+pytz==2024.1                    # Timezone handling
+tenacity==8.2.3                 # Retry logic
+click==8.1.7                    # CLI interface
+
+# Testing
+pytest==8.0.0                   # Testing framework
+pytest-cov==4.1.0               # Coverage reports
+pytest-mock==3.12.0             # Mocking
+freezegun==1.4.0                # Time mocking
+
+# Development
+black==24.1.1                   # Code formatting
+flake8==7.0.0                   # Linting
+mypy==1.8.0                     # Type checking
