@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PROPHETIA - Theme Variables
+   "Divine the Future. Reveal Nothing."
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Brand Colors - Purple/Blue Gradient */
+  --color-primary: #8b5cf6;        /* Violet */
+  --color-primary-dark: #7c3aed;   /* Deep Violet */
+  --color-secondary: #3b82f6;      /* Blue */
+  --color-accent: #06b6d4;         /* Cyan */
+  
+  /* Dark Theme (PROPHETIA always dark) */
+  --background: #0a0a0f;           /* Deep Space Black */
+  --background-card: #14141f;      /* Card Background */
+  --background-hover: #1f1f2e;     /* Hover State */
+  
+  --foreground: #e5e5ff;           /* Light Lavender Text */
+  --foreground-muted: #a0a0c0;     /* Muted Text */
+  
+  /* Semantic Colors */
+  --color-success: #10b981;        /* Green */
+  --color-warning: #f59e0b;        /* Amber */
+  --color-error: #ef4444;          /* Red */
+  --color-info: #3b82f6;           /* Blue */
+  
+  /* Borders & Dividers */
+  --border: #2a2a40;
+  --border-light: #1f1f2e;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animated Gradient Background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at top,
+    rgba(139, 92, 246, 0.15) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    ellipse at bottom right,
+    rgba(59, 130, 246, 0.1) 0%,
+    transparent 50%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-card);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
+}
+
+/* Selection */
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: var(--foreground);
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-secondary);
+}
+
+/* Focus Styles */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+  }
+}
+
+@keyframes meteor {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(300px) translateX(-300px);
+    opacity: 0;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.animate-meteor {
+  animation: meteor linear infinite;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card Glass Effect */
+.glass-card {
+  background: rgba(20, 20, 31, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
+
+.glass-card:hover {
+  background: rgba(31, 31, 46, 0.7);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-glow);
+  transition: all 0.3s ease;
+}
