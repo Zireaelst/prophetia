@@ -1,0 +1,29 @@
+{
+  "program": "prophetia.aleo",
+  "version": "0.1.0",
+  "description": "Zero-Knowledge Machine Learning Prediction Engine - Divine the Future. Reveal Nothing.",
+  "license": "MIT",
+  "authors": [
+    "PROPHETIA Team"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zireaelst/prophetia"
+  },
+  "keywords": [
+    "zero-knowledge",
+    "machine-learning",
+    "oracle",
+    "prediction",
+    "privacy",
+    "aleo",
+    "blockchain"
+  ],
+  "dependencies": {},
+  "dev-dependencies": {},
+  "network": "testnet3",
+  "compiler": {
+    "version": ">=1.9.0",
+    "optimize": true
+  }
+}
