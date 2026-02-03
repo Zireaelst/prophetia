@@ -1,0 +1,118 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# PROPHETIA Seeker Agent Configuration
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Yahoo Finance Data Sources
+data_sources:
+  yahoo_finance:
+    enabled: true
+    stocks:
+      - AAPL    # Apple Inc.
+      - GOOGL   # Alphabet Inc.
+      - MSFT    # Microsoft Corporation
+      - TSLA    # Tesla Inc.
+      - AMZN    # Amazon.com Inc.
+      - NVDA    # NVIDIA Corporation
+      - META    # Meta Platforms Inc.
+      - BTC-USD # Bitcoin
+      - ETH-USD # Ethereum
+    period: "1y"        # Historical data period (1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max)
+    interval: "1d"      # Data interval (1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h, 1d, 5d, 1wk, 1mo, 3mo)
+    retry_limit: 3
+    retry_delay: 5      # seconds
+
+# Data Processing Configuration
+data_processing:
+  normalization:
+    method: "minmax"    # Options: minmax, zscore, robust
+    scale_min: 0
+    scale_max: 1000000  # Aleo SCALE constant
+  
+  quality_scoring:
+    weights:
+      completeness: 0.4   # No missing values
+      freshness: 0.3      # Recent data (< 24 hours)
+      consistency: 0.3    # Low volatility, stable
+    min_score: 500000     # Minimum quality score (50%)
+    max_score: 1000000    # Maximum quality score (100%)
+  
+  outlier_detection:
+    enabled: true
+    method: "iqr"         # Options: iqr, zscore
+    threshold: 3.0        # Standard deviations or IQR multiplier
+
+# Blockchain Configuration
+blockchain:
+  network: "testnet"      # Options: testnet, mainnet
+  contract_address: "prophetia.aleo"
+  private_key: ""         # Set via environment variable ALEO_PRIVATE_KEY
+  endpoint: "https://api.explorer.aleo.org/v1"
+  gas_limit: 100000
+  fee: 1000               # Base fee in microcredits
+  
+  upload_config:
+    batch_size: 10        # Maximum records per batch
+    batch_delay: 5        # Seconds between batches
+    max_retries: 3
+    retry_delay: 10       # Seconds
+
+# Scheduling Configuration
+scheduling:
+  mode: "interval"        # Options: interval, cron
+  
+  # Interval mode (simple)
+  interval:
+    stock_updates: 3600   # Every 1 hour (in seconds)
+    historical_sync: 86400  # Every 24 hours (in seconds)
+  
+  # Cron mode (advanced)
+  cron:
+    stock_updates: "0 * * * *"        # Every hour at minute 0
+    historical_sync: "0 2 * * *"      # Every day at 2:00 AM
+    cleanup_old_data: "0 3 * * 0"     # Every Sunday at 3:00 AM
+
+# Logging Configuration
+logging:
+  level: "INFO"           # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/seeker_agent.log"
+  max_bytes: 10485760     # 10 MB
+  backup_count: 5
+  console: true           # Also log to console
+
+# Storage Configuration
+storage:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  cache_dir: "data/cache"
+  retention_days: 30      # Keep data for 30 days
+
+# Notifications
+notifications:
+  enabled: false
+  email:
+    enabled: false
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    sender: ""
+    recipients: []
+    password: ""          # Set via environment variable EMAIL_PASSWORD
+  
+  slack:
+    enabled: false
+    webhook_url: ""       # Set via environment variable SLACK_WEBHOOK
+    channel: "#prophetia-alerts"
+
+# Performance & Limits
+performance:
+  max_workers: 4          # Parallel processing workers
+  request_timeout: 30     # API request timeout (seconds)
+  rate_limit_delay: 1     # Delay between API calls (seconds)
+  memory_limit_mb: 512    # Maximum memory usage
+
+# Feature Flags
+features:
+  auto_start: true        # Start agent on launch
+  dry_run: false          # Test mode (no blockchain uploads)
+  cache_enabled: true     # Use cached data when available
+  metrics_enabled: true   # Track performance metrics
