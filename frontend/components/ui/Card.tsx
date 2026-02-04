@@ -1,103 +1,59 @@
-/**
- * ═══════════════════════════════════════════════════════════════════════════
- * PROPHETIA - Card Component
- * ═══════════════════════════════════════════════════════════════════════════
- * Reusable card with glass morphism effect
- */
+import React, { useRef, useState } from 'react';
 
-import React from 'react';
-
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'hover' | 'glow';
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  className?: string;
+  spotlightColor?: string;
 }
 
-export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ variant = 'default', children, className = '', ...props }, ref) => {
-    const variantStyles = {
-      default: 'glass-card',
-      hover: 'glass-card hover:border-[var(--color-primary)] transition-all duration-300',
-      glow: 'glass-card animate-pulse-glow',
-    };
+const Card: React.FC<CardProps> = ({ 
+  children, 
+  className = '', 
+  spotlightColor = 'rgba(147, 51, 234, 0.35)', // Purple default
+  ...props 
+}) => {
+  const divRef = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [opacity, setOpacity] = useState(0);
 
-    const combinedClassName = `${variantStyles[variant]} ${className}`;
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!divRef.current) return;
 
-    return (
-      <div ref={ref} className={combinedClassName} {...props}>
+    const rect = divRef.current.getBoundingClientRect();
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleMouseEnter = () => {
+    setOpacity(1);
+  };
+
+  const handleMouseLeave = () => {
+    setOpacity(0);
+  };
+
+  return (
+    <div
+      ref={divRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`relative rounded-xl border border-glass-border bg-glass-bg backdrop-blur-md overflow-hidden transition-all duration-300 ${className}`}
+      {...props}
+    >
+      {/* Spotlight Effect Layer */}
+      <div
+        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
+        style={{
+          opacity,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
+        }}
+      />
+      {/* Inner Content */}
+      <div className="relative z-10 h-full">
         {children}
       </div>
-    );
-  }
-);
-
-Card.displayName = 'Card';
-
-export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-}
-
-export const CardHeader: React.FC<CardHeaderProps> = ({
-  children,
-  className = '',
-  ...props
-}) => {
-  return (
-    <div className={`mb-4 ${className}`} {...props}>
-      {children}
     </div>
   );
 };
 
-export interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
-  children: React.ReactNode;
-}
-
-export const CardTitle: React.FC<CardTitleProps> = ({
-  children,
-  className = '',
-  ...props
-}) => {
-  return (
-    <h3
-      className={`text-xl font-semibold text-[var(--foreground)] ${className}`}
-      {...props}
-    >
-      {children}
-    </h3>
-  );
-};
-
-export interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
-  children: React.ReactNode;
-}
-
-export const CardDescription: React.FC<CardDescriptionProps> = ({
-  children,
-  className = '',
-  ...props
-}) => {
-  return (
-    <p
-      className={`text-sm text-[var(--foreground-muted)] mt-1 ${className}`}
-      {...props}
-    >
-      {children}
-    </p>
-  );
-};
-
-export interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-}
-
-export const CardContent: React.FC<CardContentProps> = ({
-  children,
-  className = '',
-  ...props
-}) => {
-  return (
-    <div className={className} {...props}>
-      {children}
-    </div>
-  );
-};
+export default Card;
