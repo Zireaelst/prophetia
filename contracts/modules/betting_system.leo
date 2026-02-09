@@ -75,7 +75,7 @@ program prophetia_betting.aleo {
         threshold: u64,
         timestamp: u64,
         is_settled: bool,
-        _nonce: group,
+
     }
     
     // ───────────────────────────────────────────────────────────────────────
@@ -285,7 +285,7 @@ program prophetia_betting.aleo {
             threshold: threshold,
             timestamp: timestamp,
             is_settled: false,
-            _nonce: group::GEN
+
         };
         
         return position;

@@ -12,7 +12,7 @@
 // Version: 0.1.0 (Week 1 - Foundation)
 // License: MIT
 
-program prophetia.aleo {
+program prophetia_core_v1.aleo {
     
     // Import dependencies (note: Leo import syntax may vary by version)
     // In production, ensure these modules are properly imported
@@ -28,7 +28,7 @@ program prophetia.aleo {
         category: u8,
         quality_score: u64,
         timestamp: u32,
-        _nonce: group,
+
     }
     
     // OracleModel: Private machine learning model
@@ -39,7 +39,7 @@ program prophetia.aleo {
         algorithm_id: u8,
         threshold: u64,
         performance_score: u64,
-        _nonce: group,
+
     }
     
     // PredictionResult: Public prediction output (revealed to all)
@@ -51,7 +51,7 @@ program prophetia.aleo {
         category: u8,               // Prediction category (1-4)
         model_id: u8,               // Which algorithm was used
         timestamp: u32,             // When prediction was made
-        _nonce: group,
+
     }
     
     // ============================================================================
@@ -77,7 +77,7 @@ program prophetia.aleo {
             category: category,
             quality_score: quality_score,
             timestamp: 0u32, // Placeholder for block height
-            _nonce: group::GEN,
+
         };
     }
     
@@ -108,7 +108,7 @@ program prophetia.aleo {
             algorithm_id: algorithm_id,
             threshold: threshold,
             performance_score: performance_score,
-            _nonce: group::GEN,
+
         };
     }
     
@@ -158,7 +158,7 @@ program prophetia.aleo {
             category: 1u8, // Default category - should match data category in production
             model_id: model.algorithm_id,
             timestamp: 0u32, // Placeholder
-            _nonce: group::GEN,
+
         };
         
         // Return prediction and model (model must be returned to maintain ownership)
@@ -196,7 +196,7 @@ program prophetia.aleo {
             category: 1u8,
             model_id: model.algorithm_id,
             timestamp: 0u32,
-            _nonce: group::GEN,
+
         };
         
         return (result, model);
@@ -254,7 +254,7 @@ program prophetia.aleo {
             category: prediction1.category,
             model_id: 0u8, // 0 indicates ensemble/aggregated prediction
             timestamp: 0u32,
-            _nonce: group::GEN,
+
         };
     }
     
@@ -276,7 +276,7 @@ program prophetia.aleo {
             category: result.category,
             model_id: result.model_id,
             timestamp: result.timestamp,
-            _nonce: group::GEN,
+
         };
     }
     

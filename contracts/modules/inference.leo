@@ -42,7 +42,7 @@ program prophetia.aleo {
         category: u8,
         quality_score: u64,
         timestamp: u32,
-        _nonce: group,
+
     }
     
     // OracleModel record structure (from models.leo)
@@ -53,7 +53,7 @@ program prophetia.aleo {
         algorithm_id: u8,
         threshold: u64,
         performance_score: u64,
-        _nonce: group,
+
     }
     
     // ═══════════════════════════════════════════════════════════════════════

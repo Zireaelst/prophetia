@@ -33,7 +33,7 @@ program prophetia.aleo {
         
         // Unique nonce for record privacy
         // Prevents record linkability on-chain
-        _nonce: group,
+
     }
 
     // Create a new data contribution record
@@ -76,7 +76,7 @@ program prophetia.aleo {
             category: category,
             quality_score: quality_score,
             timestamp: current_time,
-            _nonce: group::GEN, // Leo compiler generates unique nonce
+
         };
     }
 
@@ -101,7 +101,7 @@ program prophetia.aleo {
             category: data.category,
             quality_score: data.quality_score,
             timestamp: data.timestamp,
-            _nonce: group::GEN,
+
         };
     }
 
@@ -129,7 +129,7 @@ program prophetia.aleo {
             category: data.category,
             quality_score: new_quality_score,
             timestamp: data.timestamp,
-            _nonce: group::GEN,
+
         };
     }
 }

@@ -38,7 +38,7 @@ program prophetia.aleo {
         performance_score: u64,
         
         // Unique nonce for record privacy
-        _nonce: group,
+
     }
 
     // Create a new machine learning model record
@@ -83,7 +83,7 @@ program prophetia.aleo {
             algorithm_id: algorithm_id,
             threshold: threshold,
             performance_score: performance_score,
-            _nonce: group::GEN,
+
         };
     }
 
@@ -108,7 +108,7 @@ program prophetia.aleo {
             algorithm_id: model.algorithm_id,
             threshold: model.threshold,
             performance_score: model.performance_score,
-            _nonce: group::GEN,
+
         };
     }
 
@@ -136,7 +136,7 @@ program prophetia.aleo {
             algorithm_id: model.algorithm_id,
             threshold: model.threshold,
             performance_score: new_performance_score,
-            _nonce: group::GEN,
+
         };
     }
 

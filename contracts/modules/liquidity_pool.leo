@@ -58,7 +58,7 @@ program prophetia_pool.aleo {
         owner: address,
         amount: u64,
         pool_id: u8,
-        _nonce: group,
+
     }
     
     // ───────────────────────────────────────────────────────────────────────
@@ -204,7 +204,7 @@ program prophetia_pool.aleo {
             owner: self.caller,
             amount: new_shares,
             pool_id: 0u8,  // Default pool (multi-pool support in future)
-            _nonce: group::GEN
+
         };
         
         return share;

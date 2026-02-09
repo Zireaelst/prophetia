@@ -1,5 +1,5 @@
 {
-  "program": "prophetia.aleo",
+  "program": "prophetia_core_v1.aleo",
   "version": "0.1.0",
   "description": "Zero-Knowledge Machine Learning Prediction Engine - Divine the Future. Reveal Nothing.",
   "license": "MIT",
@@ -19,8 +19,8 @@
     "aleo",
     "blockchain"
   ],
-  "dependencies": {},
-  "dev-dependencies": {},
+  "dependencies": [],
+  "dev-dependencies": [],
   "network": "testnet3",
   "compiler": {
     "version": ">=1.9.0",
